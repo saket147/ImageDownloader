@@ -29,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
     private Bitmap bitmap = null;
     Button b1;
     Button Surf;
+    static String url;
 
     EditText EnterURL, SurfNET;
 
@@ -38,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         b1 = (Button) findViewById(R.id.button);
-        EnterURL = (EditText)findViewById(R.id.enterURL);
+
         EnterURL.setVisibility(View.INVISIBLE);
         SurfNET = (EditText)findViewById(R.id.pasteURL);
         Surf = (Button)findViewById(R.id.surf);
@@ -63,7 +64,16 @@ public class MainActivity extends ActionBarActivity {
 
     private void downloadImage(String urlStr) {
         progressDialog = ProgressDialog.show(this, "", "Downloading Image from " + urlStr);
-        final String url = urlStr;
+        EnterURL = (EditText)findViewById(R.id.enterURL);
+        url = urlStr;
+        if (EnterURL.getText() == null){
+            url = "http://www.tutorialspoint.com/green/images/logo.png";
+
+        }else
+        url = EnterURL.getText().toString();
+
+
+
 
         new Thread() {
             public void run() {
